@@ -1,0 +1,490 @@
+{
+	"info": {
+		"_postman_id": "be05b7b7-daca-46ba-aa4f-f8611cf1af8e",
+		"name": "TP_Sistemas-Distribuidos",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "36779758"
+	},
+	"item": [
+		{
+			"name": "TbUsuario",
+			"item": [
+				{
+					"name": "Post",
+					"item": [
+						{
+							"name": "Válido",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n  \"username\": \"joao_silva\",\r\n  \"password\": \"senhaSegura123\",\r\n  \"role\": \"ADMIN\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:8001/api/v1/TbUsuario",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8001",
+									"path": [
+										"api",
+										"v1",
+										"TbUsuario"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Mínimo",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n  \"username\": \"maria\",\r\n  \"password\": \"abc123456\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:8001/api/v1/TbUsuario",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8001",
+									"path": [
+										"api",
+										"v1",
+										"TbUsuario"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Inválido",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n  \"username\": \"\", // String vazia (inválida, mínimo 1 caractere)\r\n  \"password\": \"123\", // Inválida (mínimo 6 caracteres, tem apenas 3)\r\n  \"role\": null, // Tipo incorreto (deve ser string, não null; opcional, mas se presente, mínimo 1 caractere)\r\n  \"extraField\": \"teste\" // Campo não permitido devido ao .strict()\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:8001/api/v1/TbUsuario",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8001",
+									"path": [
+										"api",
+										"v1",
+										"TbUsuario"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "Get",
+					"item": [
+						{
+							"name": "Por ID",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://localhost:8001/api/v1/TbUsuario/1",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8001",
+									"path": [
+										"api",
+										"v1",
+										"TbUsuario",
+										"1"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Todos + Paginação",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://localhost:8001/api/v1/TbUsuario?page=1&limit=10&showDeleted=true",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8001",
+									"path": [
+										"api",
+										"v1",
+										"TbUsuario"
+									],
+									"query": [
+										{
+											"key": "page",
+											"value": "1"
+										},
+										{
+											"key": "limit",
+											"value": "10"
+										},
+										{
+											"key": "showDeleted",
+											"value": "true"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Não Deletados + Paginação",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://localhost:8001/api/v1/TbUsuario?page=1&limit=10&showDeleted=false",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8001",
+									"path": [
+										"api",
+										"v1",
+										"TbUsuario"
+									],
+									"query": [
+										{
+											"key": "page",
+											"value": "1"
+										},
+										{
+											"key": "limit",
+											"value": "10"
+										},
+										{
+											"key": "showDeleted",
+											"value": "false"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Deletados + Search - String",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://localhost:8001/api/v1/TbUsuario?page=1&limit=10&showDeleted=only&search=joao",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8001",
+									"path": [
+										"api",
+										"v1",
+										"TbUsuario"
+									],
+									"query": [
+										{
+											"key": "page",
+											"value": "1"
+										},
+										{
+											"key": "limit",
+											"value": "10"
+										},
+										{
+											"key": "showDeleted",
+											"value": "only"
+										},
+										{
+											"key": "search",
+											"value": "joao"
+										}
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "Put",
+					"item": [
+						{
+							"name": "Válido",
+							"request": {
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n  \"username\": \"novoUsuario123\",\r\n  \"password\": \"senhaSegura456\",\r\n  \"role\": \"admin\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:8001/api/v1/TbUsuario/1",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8001",
+									"path": [
+										"api",
+										"v1",
+										"TbUsuario",
+										"1"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Mínimo",
+							"request": {
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n  \"username\": \"usuarioMinimo\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:8001/api/v1/TbUsuario/1",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8001",
+									"path": [
+										"api",
+										"v1",
+										"TbUsuario",
+										"1"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Inválido",
+							"request": {
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n  \"username\": \"\", // String vazia (inválida, mínimo 1 caractere)\r\n  \"password\": \"123\", // Inválido (deve ter pelo menos 6 caracteres)\r\n  \"role\": null, // Tipo incorreto (deve ser string, não null)\r\n  \"extraField\": \"teste\" // Campo não permitido (não está no schema do Zod)\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:8001/api/v1/TbUsuario/1",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8001",
+									"path": [
+										"api",
+										"v1",
+										"TbUsuario",
+										"1"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "Patch",
+					"item": [
+						{
+							"name": "Válido",
+							"request": {
+								"method": "PATCH",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n  \"username\": \"novoUsuario123\",\r\n  \"password\": \"senhaSegura456\",\r\n  \"role\": \"admin\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:8001/api/v1/TbUsuario/1",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8001",
+									"path": [
+										"api",
+										"v1",
+										"TbUsuario",
+										"1"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Mínimo",
+							"request": {
+								"method": "PATCH",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n  \"username\": \"usuarioMinimo\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:8001/api/v1/TbUsuario/1",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8001",
+									"path": [
+										"api",
+										"v1",
+										"TbUsuario",
+										"1"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Inválido",
+							"request": {
+								"method": "PATCH",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n  \"username\": \"\", // String vazia (inválida, mínimo 1 caractere)\r\n  \"password\": \"123\", // Inválido (deve ter pelo menos 6 caracteres)\r\n  \"role\": null, // Tipo incorreto (deve ser string, não null)\r\n  \"extraField\": \"teste\" // Campo não permitido devido ao .strict()\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:8001/api/v1/TbUsuario/3",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8001",
+									"path": [
+										"api",
+										"v1",
+										"TbUsuario",
+										"3"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "Delete",
+					"item": [
+						{
+							"name": "All",
+							"request": {
+								"method": "DELETE",
+								"header": [],
+								"url": {
+									"raw": "http://localhost:8001/api/v1/TbUsuario",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8001",
+									"path": [
+										"api",
+										"v1",
+										"TbUsuario"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "By ID",
+							"request": {
+								"method": "DELETE",
+								"header": [],
+								"url": {
+									"raw": "http://localhost:8001/api/v1/TbUsuario/1",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8001",
+									"path": [
+										"api",
+										"v1",
+										"TbUsuario",
+										"1"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				}
+			]
+		}
+	]
+}
